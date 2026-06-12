@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scanning and artifacts &middot; CodeRef Ecosystem Docs</title>
+  <meta name="description" content="How a project gets its .coderef/ artifacts &mdash; bootstrap with coderef-init, generate with populate-coderef, read quickly with coderef-scan, repair with coderef-pipeline, and keep current with coderef-watch.">
+  <meta name="theme-color" content="#ffffff">
+  <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">CodeRef<b>Docs</b></a>
+    <button class="topbar__menu" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="topbar__search">
+      <input type="search" id="docs-search" class="topbar__search-input" placeholder="Search the docs..." autocomplete="off" aria-label="Search">
+      <kbd class="topbar__search-kbd">Ctrl K</kbd>
+      <div id="docs-search-results" class="search-results" hidden></div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__moon">&#9789;</span><span class="theme-toggle__sun">&#9728;</span>
+    </button>
+  </header>
+  <div class="layout">
+    <div class="layout__sidebar" id="sidebar">
+<nav class="nav-tree" aria-label="Documentation">
+    <ul class="nav-tree__root">
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>ASSISTANT (Entry)
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="index.html">What is CodeRef</a></li><li><a class="nav-tree__link" href="orchestrator.html">The orchestrator</a></li><li><a class="nav-tree__link" href="org-chart.html">The org chart</a></li><li><a class="nav-tree__link" href="how-to-navigate.html">How to navigate</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>CODEREF-CORE
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="coderef-core.html">What is CODEREF-CORE</a></li><li><a class="nav-tree__link is-active" href="coderef-core-scanning.html">Scanning and artifacts</a></li><li><a class="nav-tree__link" href="coderef-core-rag.html">Semantic search (rag)</a></li><li><a class="nav-tree__link" href="coderef-core-analysis.html">Contract checks and docs</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SESSIONS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="sessions.html">The daily session</a></li><li><a class="nav-tree__link" href="sessions-lifecycle.html">The session lifecycle</a></li><li><a class="nav-tree__link" href="sessions-dispatch-flow.html">The dispatch flow</a></li><li><a class="nav-tree__link" href="sessions-wake-poll.html">The wake-poll loop</a></li><li><a class="nav-tree__link" href="sessions-coordination.html">How the day is coordinated</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-soon">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>WORKFLOW
+        </button>
+        <ul class="nav-tree__pages"><li class="nav-tree__soon">Coming soon</li></ul>
+      </li>
+    </ul>
+  </nav>
+    </div>
+    <main class="layout__main">
+      <article class="prose">
+        <p class="prose__eyebrow">From source tree to .coderef/</p>
+        <h1 class="prose__title">Scanning and artifacts</h1>
+        <p class="prose__lede">How a project gets its .coderef/ artifacts &mdash; bootstrap with coderef-init, generate with populate-coderef, read quickly with coderef-scan, repair with coderef-pipeline, and keep current with coderef-watch.</p>
+<h2 id="bootstrap">Bootstrap a project</h2>
+<p><strong>/coderef-init</strong> bootstraps a project for the engine: it creates the canonical <code>coderef/</code> and <code>.coderef/</code> directory structures plus a starter <code>.coderefignore</code>. Run it once per project; everything else builds on the layout it creates.</p>
+<h2 id="generate-and-refresh">Generate and refresh</h2>
+<p><strong>/populate-coderef</strong> is the single-stage workhorse: it generates or refreshes the <code>.coderef/</code> artifacts &mdash; the element-level index, the dependency graph, and the report files &mdash; for a target project. When artifacts are missing or stale, this is the skill that rebuilds them.</p>
+<h2 id="quick-reads">Quick reads</h2>
+<p><strong>/coderef-scan</strong> gives element-level stats <em>without writing artifacts</em> &mdash; the quick &quot;what's in here&quot; read when you want a picture of a codebase but don't need to persist anything.</p>
+<h2 id="the-pipeline">The pipeline</h2>
+<p><strong>/coderef-pipeline</strong> is the multi-stage coordinator: scan, then populate, then validate, in one run. This is what workorder planning invokes to repair missing or drifted artifacts &mdash; one command that takes a project from unknown state to verified artifacts.</p>
+<h2 id="staying-current">Staying current</h2>
+<p><strong>/coderef-watch</strong> runs a long-lived watcher over a project's source and its <code>.coderef/</code> directory, emitting change notifications so artifacts stay current instead of silently drifting from the code they describe.</p>
+<h2 id="canonical-sources">Canonical sources</h2>
+<ul><li><code>CODEREF-CORE/docs/CLI.md</code> &mdash; the authoritative command reference.</li><li><code>SKILLS/CORE/coderef-init/SKILL.md</code>, <code>SKILLS/CORE/coderef-pipeline/SKILL.md</code> &mdash; the skill contracts wrapping these verbs.</li></ul>
+      </article>
+    </main>
+    <div class="layout__toc">
+<aside class="toc" aria-label="On this page">
+    <p class="toc__title">On this page</p>
+    <ul class="toc__list"><li><a href="#bootstrap">Bootstrap a project</a></li><li><a href="#generate-and-refresh">Generate and refresh</a></li><li><a href="#quick-reads">Quick reads</a></li><li><a href="#the-pipeline">The pipeline</a></li><li><a href="#staying-current">Staying current</a></li><li><a href="#canonical-sources">Canonical sources</a></li></ul>
+  </aside>
+    </div>
+  </div>
+  <script src="assets/theme.js"></script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canonical vs wrapper &middot; CodeRef Ecosystem Docs</title>
+  <meta name="description" content="A skill's real logic lives in exactly one place &mdash; the canonical package in the ASSISTANT repo. What's installed into each CLI surface is a thin wrapper that points back at it. Validators enforce the split.">
+  <meta name="theme-color" content="#ffffff">
+  <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">CodeRef<b>Docs</b></a>
+    <button class="topbar__menu" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="topbar__search">
+      <input type="search" id="docs-search" class="topbar__search-input" placeholder="Search the docs..." autocomplete="off" aria-label="Search">
+      <kbd class="topbar__search-kbd">Ctrl K</kbd>
+      <div id="docs-search-results" class="search-results" hidden></div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__moon">&#9789;</span><span class="theme-toggle__sun">&#9728;</span>
+    </button>
+  </header>
+  <div class="layout">
+    <div class="layout__sidebar" id="sidebar">
+<nav class="nav-tree" aria-label="Documentation">
+    <ul class="nav-tree__root">
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>ASSISTANT (Entry)
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="index.html">What is CodeRef</a></li><li><a class="nav-tree__link" href="orchestrator.html">The orchestrator</a></li><li><a class="nav-tree__link" href="org-chart.html">The org chart</a></li><li><a class="nav-tree__link" href="how-to-navigate.html">How to navigate</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>CODEREF-CORE
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="coderef-core.html">What is CODEREF-CORE</a></li><li><a class="nav-tree__link" href="coderef-core-scanning.html">Scanning and artifacts</a></li><li><a class="nav-tree__link" href="coderef-core-rag.html">Semantic search (rag)</a></li><li><a class="nav-tree__link" href="coderef-core-analysis.html">Contract checks and docs</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link is-active" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SESSIONS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="sessions.html">The daily session</a></li><li><a class="nav-tree__link" href="sessions-lifecycle.html">The session lifecycle</a></li><li><a class="nav-tree__link" href="sessions-dispatch-flow.html">The dispatch flow</a></li><li><a class="nav-tree__link" href="sessions-wake-poll.html">The wake-poll loop</a></li><li><a class="nav-tree__link" href="sessions-coordination.html">How the day is coordinated</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-soon">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>WORKFLOW
+        </button>
+        <ul class="nav-tree__pages"><li class="nav-tree__soon">Coming soon</li></ul>
+      </li>
+    </ul>
+  </nav>
+    </div>
+    <main class="layout__main">
+      <article class="prose">
+        <p class="prose__eyebrow">One source of truth, many surfaces</p>
+        <h1 class="prose__title">Canonical vs wrapper</h1>
+        <p class="prose__lede">A skill's real logic lives in exactly one place &mdash; the canonical package in the ASSISTANT repo. What's installed into each CLI surface is a thin wrapper that points back at it. Validators enforce the split.</p>
+<h2 id="the-split">The split</h2>
+<p>The skill's real logic lives in <strong>one place</strong> &mdash; the canonical package under <code>SKILLS/</code> in the ASSISTANT repo. What's installed into each CLI surface (<code>~/.claude/skills/</code>, <code>~/.codex/skills/</code>, <code>~/.gemini/antigravity-cli/skills/</code>) is a <em>thin wrapper</em>: frontmatter plus a <code>Read:</code> pointer to the canonical SKILL.md and the instruction &quot;do not define a second workflow here.&quot;</p>
+<p>Wrappers are <strong>delivery surfaces, never workflow owners</strong>. Three CLI tools can invoke the same skill, and all three are reading the same canonical contract &mdash; fix it once, every surface gets the fix.</p>
+<h2 id="the-wrapper-contract">The wrapper contract</h2>
+<p>A wrapper carries no workflow of its own. Its whole job is routing: name the skill, point at the canonical file, get out of the way. The moment a wrapper grows steps, the system has two versions of the truth &mdash; which is exactly the failure the model exists to prevent.</p>
+<h2 id="runner-short-circuit">The runner-short-circuit profile</h2>
+<p>One refinement exists for hot-path loop skills: the <strong>runner-short-circuit</strong> wrapper profile tells the agent to run the skill's runner directly on a normal tick instead of re-reading a large canonical file every few minutes. Same single source of truth &mdash; far cheaper context. The wake-poll inbox check is the canonical example: it fires every few minutes all session long, and the wrapper inlines just enough to act on the runner's output without loading the full contract each tick.</p>
+<h2 id="enforcement">Enforcement</h2>
+<p>Validators enforce all of this mechanically:</p>
+<ul><li><strong>Package shape</strong> &mdash; the directory anatomy is checked, not trusted.</li><li><strong>Three-surface wrapper parity</strong> &mdash; the installed wrappers across the CLI surfaces must agree.</li><li><strong>Signpost discipline</strong> &mdash; descriptions that drift into changelog history are refused.</li><li><strong>The version-bump gate</strong> &mdash; a pre-commit hook refuses skill-code changes that don't bump the version.</li></ul>
+<h2 id="canonical-sources">Canonical sources</h2>
+<ul><li><code>SKILLS/WORKFLOW/new-coderef-skill/SKILL.md</code> &mdash; installs and maintains the wrappers; its <code>references/</code> hold the packaging and wrapper standards.</li><li><code>SKILLS/STANDARDS/SKILL-CONTRACTS.md</code> &mdash; the enforcement-contract taxonomy.</li></ul>
+      </article>
+    </main>
+    <div class="layout__toc">
+<aside class="toc" aria-label="On this page">
+    <p class="toc__title">On this page</p>
+    <ul class="toc__list"><li><a href="#the-split">The split</a></li><li><a href="#the-wrapper-contract">The wrapper contract</a></li><li><a href="#runner-short-circuit">The runner-short-circuit profile</a></li><li><a href="#enforcement">Enforcement</a></li><li><a href="#canonical-sources">Canonical sources</a></li></ul>
+  </aside>
+    </div>
+  </div>
+  <script src="assets/theme.js"></script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/search.js"></script>
+</body>
+</html>

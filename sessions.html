@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The daily session &middot; CodeRef Ecosystem Docs</title>
+  <meta name="description" content="A multi-agent day runs inside a daily session &mdash; a dated directory every domain joins, where work moves by dispatch and idle agents stay responsive on a wake-poll loop. This is the skill-side of how the loop runs.">
+  <meta name="theme-color" content="#ffffff">
+  <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">CodeRef<b>Docs</b></a>
+    <button class="topbar__menu" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="topbar__search">
+      <input type="search" id="docs-search" class="topbar__search-input" placeholder="Search the docs..." autocomplete="off" aria-label="Search">
+      <kbd class="topbar__search-kbd">Ctrl K</kbd>
+      <div id="docs-search-results" class="search-results" hidden></div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__moon">&#9789;</span><span class="theme-toggle__sun">&#9728;</span>
+    </button>
+  </header>
+  <div class="layout">
+    <div class="layout__sidebar" id="sidebar">
+<nav class="nav-tree" aria-label="Documentation">
+    <ul class="nav-tree__root">
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>ASSISTANT (Entry)
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="index.html">What is CodeRef</a></li><li><a class="nav-tree__link" href="orchestrator.html">The orchestrator</a></li><li><a class="nav-tree__link" href="org-chart.html">The org chart</a></li><li><a class="nav-tree__link" href="how-to-navigate.html">How to navigate</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>CODEREF-CORE
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="coderef-core.html">What is CODEREF-CORE</a></li><li><a class="nav-tree__link" href="coderef-core-scanning.html">Scanning and artifacts</a></li><li><a class="nav-tree__link" href="coderef-core-rag.html">Semantic search (rag)</a></li><li><a class="nav-tree__link" href="coderef-core-analysis.html">Contract checks and docs</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SESSIONS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link is-active" href="sessions.html">The daily session</a></li><li><a class="nav-tree__link" href="sessions-lifecycle.html">The session lifecycle</a></li><li><a class="nav-tree__link" href="sessions-dispatch-flow.html">The dispatch flow</a></li><li><a class="nav-tree__link" href="sessions-wake-poll.html">The wake-poll loop</a></li><li><a class="nav-tree__link" href="sessions-coordination.html">How the day is coordinated</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-soon">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>WORKFLOW
+        </button>
+        <ul class="nav-tree__pages"><li class="nav-tree__soon">Coming soon</li></ul>
+      </li>
+    </ul>
+  </nav>
+    </div>
+    <main class="layout__main">
+      <article class="prose">
+        <p class="prose__eyebrow">The fleet's heartbeat</p>
+        <h1 class="prose__title">The daily session</h1>
+        <p class="prose__lede">A multi-agent day runs inside a daily session &mdash; a dated directory every domain joins, where work moves by dispatch and idle agents stay responsive on a wake-poll loop. This is the skill-side of how the loop runs.</p>
+<h2 id="the-session-is-the-day">The session is the day</h2>
+<p>A multi-agent day runs inside a <em>daily session</em> &mdash; a dated directory under <code>LOGS/SESSIONS/daily-agent-session-{date}/</code>. The session is the heartbeat that ties the fleet together: it is created once at the start of the day, every domain joins it, work moves between domains through it, and it is swept closed at day's end.</p>
+<p>This section covers the <strong>skill-side</strong> &mdash; the mechanics, run by the SESSION skills &mdash; and, composed from ASSISTANT's own words, the coordination side: <a href="sessions-coordination.html">How the day is coordinated</a>.</p>
+<h2 id="the-three-mechanics">The three mechanics</h2>
+<p>Three moving parts make the session work, each its own page:</p>
+<ul><li><strong>The lifecycle</strong> &mdash; create the session, join it, close it. How a domain checks in and how the day ends.</li><li><strong>The dispatch flow</strong> &mdash; how work moves between domains: file a dispatch, accept it, complete it, read the result.</li><li><strong>The wake-poll loop</strong> &mdash; how an idle agent stays responsive: sleep, poll the inbox, re-arm. A loop that forgets to re-arm dies silently.</li></ul>
+<h2 id="canonical-sources">Canonical sources</h2>
+<p>The authoritative definitions live in the SESSION skills. When you need the exact behavior, read the <code>SKILL.md</code>:</p>
+<ul><li><code>SKILLS/SESSION/join-daily-session/SKILL.md</code></li><li><code>SKILLS/SESSION/check-dispatch-inbox/SKILL.md</code></li><li><code>SKILLS/SESSION/accept-session-dispatch/SKILL.md</code></li><li><code>SKILLS/SESSION/dispatch-session-request/SKILL.md</code></li><li><code>SKILLS/SESSION/schedule-agent-wake/SKILL.md</code></li></ul>
+      </article>
+    </main>
+    <div class="layout__toc">
+<aside class="toc" aria-label="On this page">
+    <p class="toc__title">On this page</p>
+    <ul class="toc__list"><li><a href="#the-session-is-the-day">The session is the day</a></li><li><a href="#the-three-mechanics">The three mechanics</a></li><li><a href="#canonical-sources">Canonical sources</a></li></ul>
+  </aside>
+    </div>
+  </div>
+  <script src="assets/theme.js"></script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/search.js"></script>
+</body>
+</html>

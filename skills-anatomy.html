@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anatomy of a skill package &middot; CodeRef Ecosystem Docs</title>
+  <meta name="description" content="Every skill is a directory at SKILLS/{CATEGORY}/{skill-name}/ with a standard shape &mdash; SKILL.md as the agent-facing contract, skill.json as the machine manifest, a runner when there is deterministic work, and support folders only when earned.">
+  <meta name="theme-color" content="#ffffff">
+  <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">CodeRef<b>Docs</b></a>
+    <button class="topbar__menu" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="topbar__search">
+      <input type="search" id="docs-search" class="topbar__search-input" placeholder="Search the docs..." autocomplete="off" aria-label="Search">
+      <kbd class="topbar__search-kbd">Ctrl K</kbd>
+      <div id="docs-search-results" class="search-results" hidden></div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__moon">&#9789;</span><span class="theme-toggle__sun">&#9728;</span>
+    </button>
+  </header>
+  <div class="layout">
+    <div class="layout__sidebar" id="sidebar">
+<nav class="nav-tree" aria-label="Documentation">
+    <ul class="nav-tree__root">
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>ASSISTANT (Entry)
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="index.html">What is CodeRef</a></li><li><a class="nav-tree__link" href="orchestrator.html">The orchestrator</a></li><li><a class="nav-tree__link" href="org-chart.html">The org chart</a></li><li><a class="nav-tree__link" href="how-to-navigate.html">How to navigate</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>CODEREF-CORE
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="coderef-core.html">What is CODEREF-CORE</a></li><li><a class="nav-tree__link" href="coderef-core-scanning.html">Scanning and artifacts</a></li><li><a class="nav-tree__link" href="coderef-core-rag.html">Semantic search (rag)</a></li><li><a class="nav-tree__link" href="coderef-core-analysis.html">Contract checks and docs</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link is-active" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SESSIONS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="sessions.html">The daily session</a></li><li><a class="nav-tree__link" href="sessions-lifecycle.html">The session lifecycle</a></li><li><a class="nav-tree__link" href="sessions-dispatch-flow.html">The dispatch flow</a></li><li><a class="nav-tree__link" href="sessions-wake-poll.html">The wake-poll loop</a></li><li><a class="nav-tree__link" href="sessions-coordination.html">How the day is coordinated</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-soon">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>WORKFLOW
+        </button>
+        <ul class="nav-tree__pages"><li class="nav-tree__soon">Coming soon</li></ul>
+      </li>
+    </ul>
+  </nav>
+    </div>
+    <main class="layout__main">
+      <article class="prose">
+        <p class="prose__eyebrow">One directory, one contract</p>
+        <h1 class="prose__title">Anatomy of a skill package</h1>
+        <p class="prose__lede">Every skill is a directory at SKILLS/{CATEGORY}/{skill-name}/ with a standard shape &mdash; SKILL.md as the agent-facing contract, skill.json as the machine manifest, a runner when there is deterministic work, and support folders only when earned.</p>
+<h2 id="the-package-shape">The package shape</h2>
+<p>Every skill is a directory at <code>SKILLS/{CATEGORY}/{skill-name}/</code> with a standard anatomy. Four pieces matter; each has one job.</p>
+<h2 id="skill-md">SKILL.md &mdash; the contract</h2>
+<p><code>SKILL.md</code> is the canonical agent-facing contract: frontmatter (<code>name</code>, <code>description</code>, <code>metadata.version</code>), <code>## Instructions</code> between <code><strong>START</strong></code>/<code><strong>STOP</strong></code> markers, and <code>## Common Issues</code>.</p>
+<p>The description is a <em>signpost</em> &mdash; what the skill does and when to use it, with no changelog history. History lives in <code>references/CHANGELOG.md</code>, and a validator gate refuses descriptions that drift into changelog territory.</p>
+<h2 id="skill-json">skill.json &mdash; the manifest</h2>
+<p><code>skill.json</code> is the machine-readable manifest: id, version (kept in lockstep with SKILL.md), category, summary, and the reads/writes/depends_on contract. Discovery, validation, and tracking all consume this file &mdash; and <code>TRACKING/skills.json</code> is rebuilt from the manifests on disk, never hand-edited.</p>
+<h2 id="the-runner">run.mjs &mdash; the runner</h2>
+<p>When a skill has deterministic work, it ships <code>run.mjs</code> &mdash; the runner. Every runner answers <code>--help</code> via a shared emitter, so any agent can interrogate any runner the same way. Prose-only skills are exempt: no mechanics, no runner.</p>
+<h2 id="support-folders">Support folders, when earned</h2>
+<p>Support folders exist only when the skill has earned them:</p>
+<ul><li><code>references/</code> &mdash; stable depth, including the changelog.</li><li><code>assets/</code> &mdash; templates the skill stamps out.</li><li><code>scripts/</code> &mdash; validators and helpers.</li><li><code>standards.json</code> &mdash; behavior-seed pointers.</li><li><code>kaizen.md</code> &mdash; the per-skill continuous-improvement sidecar every run can append to.</li></ul>
+<h2 id="canonical-sources">Canonical sources</h2>
+<ul><li><code>SKILLS/WORKFLOW/new-coderef-skill/SKILL.md</code> &mdash; the authoring skill, plus its <code>references/</code> for the packaging and wrapper standards.</li><li><code>SKILLS/STANDARDS/SKILL-CONTRACTS.md</code> &mdash; what &quot;MANDATORY&quot; language must be backed by.</li></ul>
+      </article>
+    </main>
+    <div class="layout__toc">
+<aside class="toc" aria-label="On this page">
+    <p class="toc__title">On this page</p>
+    <ul class="toc__list"><li><a href="#the-package-shape">The package shape</a></li><li><a href="#skill-md">SKILL.md &mdash; the contract</a></li><li><a href="#skill-json">skill.json &mdash; the manifest</a></li><li><a href="#the-runner">run.mjs &mdash; the runner</a></li><li><a href="#support-folders">Support folders, when earned</a></li><li><a href="#canonical-sources">Canonical sources</a></li></ul>
+  </aside>
+    </div>
+  </div>
+  <script src="assets/theme.js"></script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/search.js"></script>
+</body>
+</html>

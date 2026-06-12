@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The registry-db model &middot; CodeRef Ecosystem Docs</title>
+  <meta name="description" content="CodeRef tracks its work in a small SQLite database &mdash; the single source of truth. The JSON files under TRACKING/ that agents read every day are generated views of it. When a view and the DB disagree, the DB wins.">
+  <meta name="theme-color" content="#ffffff">
+  <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">CodeRef<b>Docs</b></a>
+    <button class="topbar__menu" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="topbar__search">
+      <input type="search" id="docs-search" class="topbar__search-input" placeholder="Search the docs..." autocomplete="off" aria-label="Search">
+      <kbd class="topbar__search-kbd">Ctrl K</kbd>
+      <div id="docs-search-results" class="search-results" hidden></div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__moon">&#9789;</span><span class="theme-toggle__sun">&#9728;</span>
+    </button>
+  </header>
+  <div class="layout">
+    <div class="layout__sidebar" id="sidebar">
+<nav class="nav-tree" aria-label="Documentation">
+    <ul class="nav-tree__root">
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>ASSISTANT (Entry)
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="index.html">What is CodeRef</a></li><li><a class="nav-tree__link" href="orchestrator.html">The orchestrator</a></li><li><a class="nav-tree__link" href="org-chart.html">The org chart</a></li><li><a class="nav-tree__link" href="how-to-navigate.html">How to navigate</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>CODEREF-CORE
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="coderef-core.html">What is CODEREF-CORE</a></li><li><a class="nav-tree__link" href="coderef-core-scanning.html">Scanning and artifacts</a></li><li><a class="nav-tree__link" href="coderef-core-rag.html">Semantic search (rag)</a></li><li><a class="nav-tree__link" href="coderef-core-analysis.html">Contract checks and docs</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SESSIONS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="sessions.html">The daily session</a></li><li><a class="nav-tree__link" href="sessions-lifecycle.html">The session lifecycle</a></li><li><a class="nav-tree__link" href="sessions-dispatch-flow.html">The dispatch flow</a></li><li><a class="nav-tree__link" href="sessions-wake-poll.html">The wake-poll loop</a></li><li><a class="nav-tree__link" href="sessions-coordination.html">How the day is coordinated</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link is-active" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-soon">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>WORKFLOW
+        </button>
+        <ul class="nav-tree__pages"><li class="nav-tree__soon">Coming soon</li></ul>
+      </li>
+    </ul>
+  </nav>
+    </div>
+    <main class="layout__main">
+      <article class="prose">
+        <p class="prose__eyebrow">The DB is the truth</p>
+        <h1 class="prose__title">The registry-db model</h1>
+        <p class="prose__lede">CodeRef tracks its work in a small SQLite database &mdash; the single source of truth. The JSON files under TRACKING/ that agents read every day are generated views of it. When a view and the DB disagree, the DB wins.</p>
+<h2 id="db-truth-json-views">DB truth, JSON views</h2>
+<p>CodeRef tracks its work in a small <strong>SQLite database</strong> (<code>registry.db</code>). That database is the <strong>single source of truth</strong>. The many <code>*.json</code> files under <code>TRACKING/</code> that agents and tools read every day are <strong>generated views</strong> &mdash; projections of the database, regenerated by export scripts. They exist because JSON is cheap to read, diff, and grep; the DB is where writes land.</p>
+<h2 id="the-governing-rule">The governing rule</h2>
+<blockquote class="callout"><p><strong>When a view and the DB disagree, the DB wins.</strong></p></blockquote>
+<p>A view can be stale (it hasn't been regenerated since the last write) or locally dirty (someone edited the file by hand). Neither changes the truth &mdash; the DB does. The fix for a wrong-looking view is always <strong>regenerate it from the DB</strong>, never patch the JSON.</p>
+<h2 id="see-it-in-the-registry">See it in the registry</h2>
+<p>You can see the model directly in <code>TRACKING/registries.json</code>. Entries carry a <code>type</code>:</p>
+<ul><li><code>&quot;type&quot;: &quot;view&quot;</code> with a <code>&quot;source&quot;</code> (e.g. <code>unified-registry.json</code> or a <code>registry.db</code> table) and a <code>&quot;view_filter&quot;</code> &mdash; a generated projection. Examples: <code>workorders</code>, <code>stubs</code>, <code>skills</code>, <code>sessions</code>, <code>dispatches</code>, <code>kaizen</code>.</li><li><code>&quot;type&quot;: &quot;registry&quot;</code> / <code>&quot;json-index&quot;</code> &mdash; a directly-maintained artifact with a named owner.</li></ul>
+<p>The <code>kaizen</code> registry states it plainly: <em>&quot;Source-of-truth is the DB; this JSON is regenerated by scripts/legacy-export.py.&quot;</em> That sentence is the whole philosophy in one line.</p>
+<h2 id="in-this-section">In this section</h2>
+<ul><li><a href="tracking-lifecycle.html">The lifecycle of tracked entities</a> &mdash; stub, workorder, dispatch, ticket: what each is and how it moves.</li><li><a href="tracking-views-vs-db.html">Views-vs-DB discipline</a> &mdash; why you never hand-edit a generated view, and what to do instead.</li><li><a href="tracking-registries.html">The canonical registries</a> &mdash; the files worth knowing by name.</li></ul>
+<h2 id="canonical-sources">Canonical sources</h2>
+<ul><li><code>TRACKING/registries.json</code> &mdash; the registry of registries: every tracked artifact, its type, its source, its writer.</li></ul>
+      </article>
+    </main>
+    <div class="layout__toc">
+<aside class="toc" aria-label="On this page">
+    <p class="toc__title">On this page</p>
+    <ul class="toc__list"><li><a href="#db-truth-json-views">DB truth, JSON views</a></li><li><a href="#the-governing-rule">The governing rule</a></li><li><a href="#see-it-in-the-registry">See it in the registry</a></li><li><a href="#in-this-section">In this section</a></li><li><a href="#canonical-sources">Canonical sources</a></li></ul>
+  </aside>
+    </div>
+  </div>
+  <script src="assets/theme.js"></script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/search.js"></script>
+</body>
+</html>

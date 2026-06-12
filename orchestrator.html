@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The orchestrator &middot; CodeRef Ecosystem Docs</title>
+  <meta name="description" content="ASSISTANT is the ecosystem coordinator &mdash; the lead agent that drives the whole system. The role is narrower and sharper than &quot;knows everything&quot;: it owns the coordination, not the domains' work.">
+  <meta name="theme-color" content="#ffffff">
+  <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">CodeRef<b>Docs</b></a>
+    <button class="topbar__menu" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="topbar__search">
+      <input type="search" id="docs-search" class="topbar__search-input" placeholder="Search the docs..." autocomplete="off" aria-label="Search">
+      <kbd class="topbar__search-kbd">Ctrl K</kbd>
+      <div id="docs-search-results" class="search-results" hidden></div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__moon">&#9789;</span><span class="theme-toggle__sun">&#9728;</span>
+    </button>
+  </header>
+  <div class="layout">
+    <div class="layout__sidebar" id="sidebar">
+<nav class="nav-tree" aria-label="Documentation">
+    <ul class="nav-tree__root">
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>ASSISTANT (Entry)
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="index.html">What is CodeRef</a></li><li><a class="nav-tree__link is-active" href="orchestrator.html">The orchestrator</a></li><li><a class="nav-tree__link" href="org-chart.html">The org chart</a></li><li><a class="nav-tree__link" href="how-to-navigate.html">How to navigate</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>CODEREF-CORE
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="coderef-core.html">What is CODEREF-CORE</a></li><li><a class="nav-tree__link" href="coderef-core-scanning.html">Scanning and artifacts</a></li><li><a class="nav-tree__link" href="coderef-core-rag.html">Semantic search (rag)</a></li><li><a class="nav-tree__link" href="coderef-core-analysis.html">Contract checks and docs</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SESSIONS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="sessions.html">The daily session</a></li><li><a class="nav-tree__link" href="sessions-lifecycle.html">The session lifecycle</a></li><li><a class="nav-tree__link" href="sessions-dispatch-flow.html">The dispatch flow</a></li><li><a class="nav-tree__link" href="sessions-wake-poll.html">The wake-poll loop</a></li><li><a class="nav-tree__link" href="sessions-coordination.html">How the day is coordinated</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-soon">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>WORKFLOW
+        </button>
+        <ul class="nav-tree__pages"><li class="nav-tree__soon">Coming soon</li></ul>
+      </li>
+    </ul>
+  </nav>
+    </div>
+    <main class="layout__main">
+      <article class="prose">
+        <p class="prose__eyebrow">Meet ASSISTANT</p>
+        <h1 class="prose__title">The orchestrator</h1>
+        <p class="prose__lede">ASSISTANT is the ecosystem coordinator &mdash; the lead agent that drives the whole system. The role is narrower and sharper than &quot;knows everything&quot;: it owns the coordination, not the domains' work.</p>
+<h2 id="the-coordinator">The coordinator</h2>
+<p>ASSISTANT is the <strong>ecosystem coordinator</strong> &mdash; the lead agent that drives the whole system. But the role is narrower and sharper than &quot;knows everything.&quot;</p>
+<h2 id="what-it-owns">What it owns</h2>
+<p>What ASSISTANT owns is the <em>coordination</em>. It runs the daily session, routes work to the right domain, absorbs blockers so agents aren't stuck waiting, integrates finished work back to the trunk, and holds the standards. It is the <strong>enforcement of the standards, not the knowledge of every codebase.</strong></p>
+<p>When a domain finishes work, ASSISTANT lands it. When a domain is blocked, ASSISTANT decides or routes the decision. When a bug surfaces, ASSISTANT makes sure it's tracked and sent to its owner.</p>
+<h2 id="what-it-does-not-own">What it does not own</h2>
+<p>What ASSISTANT does <em>not</em> own is the domains' actual work. PRIMARY-SOURCES knows its project; DEBUG knows the ecosystem's bugs; SKILLS knows the skill system. ASSISTANT does not reach past a coordinator into its agents, does not invent a domain's facts, and does not do a domain's job. It coordinates <em>between</em> domains; each domain is sovereign over its own area.</p>
+<h2 id="the-blocker-absorber">The blocker-absorber</h2>
+<p>Agent terminals are <em>execution surfaces</em>, not decision surfaces. When an agent hits a decision it can't make, it routes it to ASSISTANT &mdash; not to the operator's chat. ASSISTANT decides autonomously on standards, or, for the genuinely operator-reserved set, surfaces it to the operator.</p>
+<p>That reserved set is small and specific: schema-breaking changes, irreversible actions, and explicit asks. Everything else, ASSISTANT drives.</p>
+<h2 id="the-operators-seat">The operator's seat</h2>
+<p>Above ASSISTANT is the operator. The operator sets direction; ASSISTANT executes and coordinates the agents to deliver it. ASSISTANT is the single point the operator drives through &mdash; talk to ASSISTANT, and it drives the ecosystem.</p>
+      </article>
+    </main>
+    <div class="layout__toc">
+<aside class="toc" aria-label="On this page">
+    <p class="toc__title">On this page</p>
+    <ul class="toc__list"><li><a href="#the-coordinator">The coordinator</a></li><li><a href="#what-it-owns">What it owns</a></li><li><a href="#what-it-does-not-own">What it does not own</a></li><li><a href="#the-blocker-absorber">The blocker-absorber</a></li><li><a href="#the-operators-seat">The operator's seat</a></li></ul>
+  </aside>
+    </div>
+  </div>
+  <script src="assets/theme.js"></script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/search.js"></script>
+</body>
+</html>

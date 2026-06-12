@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The org chart &middot; CodeRef Ecosystem Docs</title>
+  <meta name="description" content="The ecosystem has 63 registered domains (35 active), grouped by project. The shape is fractal &mdash; ASSISTANT coordinates the ecosystem the way a project coordinator drives its own project, one level down.">
+  <meta name="theme-color" content="#ffffff">
+  <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">CodeRef<b>Docs</b></a>
+    <button class="topbar__menu" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="topbar__search">
+      <input type="search" id="docs-search" class="topbar__search-input" placeholder="Search the docs..." autocomplete="off" aria-label="Search">
+      <kbd class="topbar__search-kbd">Ctrl K</kbd>
+      <div id="docs-search-results" class="search-results" hidden></div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__moon">&#9789;</span><span class="theme-toggle__sun">&#9728;</span>
+    </button>
+  </header>
+  <div class="layout">
+    <div class="layout__sidebar" id="sidebar">
+<nav class="nav-tree" aria-label="Documentation">
+    <ul class="nav-tree__root">
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>ASSISTANT (Entry)
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="index.html">What is CodeRef</a></li><li><a class="nav-tree__link" href="orchestrator.html">The orchestrator</a></li><li><a class="nav-tree__link is-active" href="org-chart.html">The org chart</a></li><li><a class="nav-tree__link" href="how-to-navigate.html">How to navigate</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>CODEREF-CORE
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="coderef-core.html">What is CODEREF-CORE</a></li><li><a class="nav-tree__link" href="coderef-core-scanning.html">Scanning and artifacts</a></li><li><a class="nav-tree__link" href="coderef-core-rag.html">Semantic search (rag)</a></li><li><a class="nav-tree__link" href="coderef-core-analysis.html">Contract checks and docs</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SESSIONS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="sessions.html">The daily session</a></li><li><a class="nav-tree__link" href="sessions-lifecycle.html">The session lifecycle</a></li><li><a class="nav-tree__link" href="sessions-dispatch-flow.html">The dispatch flow</a></li><li><a class="nav-tree__link" href="sessions-wake-poll.html">The wake-poll loop</a></li><li><a class="nav-tree__link" href="sessions-coordination.html">How the day is coordinated</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-soon">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>WORKFLOW
+        </button>
+        <ul class="nav-tree__pages"><li class="nav-tree__soon">Coming soon</li></ul>
+      </li>
+    </ul>
+  </nav>
+    </div>
+    <main class="layout__main">
+      <article class="prose">
+        <p class="prose__eyebrow">How the fleet is arranged</p>
+        <h1 class="prose__title">The org chart</h1>
+        <p class="prose__lede">The ecosystem has 63 registered domains (35 active), grouped by project. The shape is fractal &mdash; ASSISTANT coordinates the ecosystem the way a project coordinator drives its own project, one level down.</p>
+<h2 id="the-shape-is-fractal">The shape is fractal</h2>
+<p>The ecosystem has <strong>63 registered domains (35 active)</strong>, grouped by project. The shape is <em>fractal</em>: ASSISTANT coordinates the whole ecosystem the same way PRIMARY-SOURCES coordinates its own project &mdash; one level down. A &quot;lead&quot; domain coordinates a small team under it; the pattern repeats.</p>
+<p>At the top sits the <strong>operator</strong>, who drives through ASSISTANT. Below ASSISTANT, the fleet falls into three groups: the ecosystem tooling, the coordinated projects, and the standalone projects.</p>
+<h2 id="ecosystem-tooling">Ecosystem tooling</h2>
+<p>About 18 active domains sit directly under ASSISTANT (registry <code>project_id = assistant</code>). They are the machinery the whole ecosystem runs on:</p>
+<div class="table-wrap"><table class="data"><thead><tr><th>Domain(s)</th><th>What it owns</th></tr></thead><tbody><tr><td>SKILLS, SKILLS-WORKFLOW</td><td>The skill system</td></tr><tr><td>TRACKING, STUBS</td><td>The registry and the backlog</td></tr><tr><td>DEBUG</td><td>Ecosystem bug fixing</td></tr><tr><td>SURFACES, SURFACES-HTML</td><td>Operator-facing rendered output</td></tr><tr><td>CR-HTML</td><td>This docs site</td></tr><tr><td>DISCOVER, AUTORESEARCH</td><td>Investigation</td></tr><tr><td>DOCUMENTATION, SESSIONS, HERMES, LLOYD, ARCHIVED</td><td>Supporting roles</td></tr><tr><td>ASSISTANT-TEMP1 / TEMP2</td><td>Ephemeral delegation helpers</td></tr></tbody></table></div>
+<h2 id="the-primary-sources-project">The PRIMARY-SOURCES project</h2>
+<p>PRIMARY-SOURCES is a <strong>project coordinator</strong> &mdash; it drives the PS project the same way ASSISTANT drives the ecosystem, one level down. Under it, lead domains each coordinate a small team:</p>
+<ul><li><strong>PS-APP</strong> (front-end lead) &mdash; leads PS-HTML, PS-REVIEWER</li><li><strong>PS-ARCHIVE</strong> (lead) &mdash; leads SOURCE-MATERIAL, PS-RESEARCH</li><li><strong>PS-PIPELINE</strong> (lead) &mdash; leads PRIMARY-SOURCES-API, PS-TRANSCRIBE</li><li><strong>PS-DEBUG</strong> &mdash; the project's debug agent</li><li><strong>STAFF</strong> &mdash; a docs/standards shelf, <em>not</em> a coordinator (see the note below)</li></ul>
+<h2 id="standalone-projects">Standalone projects</h2>
+<p>These stand on their own, outside the ASSISTANT tooling group and the PS project:</p>
+<ul><li><strong>CODEREF-CORE</strong> &mdash; the CLI / core engine</li><li><strong>ENTITY</strong> &mdash; the entity-platform project</li><li><strong>ON-TASK</strong> &mdash; the operator focus / task-board layer</li><li><strong>PROJECTS</strong> &mdash; the project registry root</li></ul>
+<h2 id="a-note-on-the-registry">A note on the registry</h2>
+<p>One trap worth calling out: <strong>STAFF looks like a tier</strong> in the registry's <code>hosts_under</code> field, but it is just a <strong>docs/standards folder where agent files live</strong> &mdash; not a boss. It is not a coordinator.</p>
+<p>More generally, <code>hosts_under</code> records <em>where an agent's files are filed</em>, which isn't always the same as <em>who coordinates it</em>. The canonical command line is the project lead, not the folder.</p>
+      </article>
+    </main>
+    <div class="layout__toc">
+<aside class="toc" aria-label="On this page">
+    <p class="toc__title">On this page</p>
+    <ul class="toc__list"><li><a href="#the-shape-is-fractal">The shape is fractal</a></li><li><a href="#ecosystem-tooling">Ecosystem tooling</a></li><li><a href="#the-primary-sources-project">The PRIMARY-SOURCES project</a></li><li><a href="#standalone-projects">Standalone projects</a></li><li><a href="#a-note-on-the-registry">A note on the registry</a></li></ul>
+  </aside>
+    </div>
+  </div>
+  <script src="assets/theme.js"></script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/search.js"></script>
+</body>
+</html>

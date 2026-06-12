@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How the day is coordinated &middot; CodeRef Ecosystem Docs</title>
+  <meta name="description" content="ASSISTANT opens the session, every agent checks in and arms a wake-poll loop, work flows as dispatches (files in inboxes, polled &mdash; no server), blockers route back as andon pulls, and the day ends with a liveness-aware close. Coordination is a protocol made of files and a rhythm, not a runtime.">
+  <meta name="theme-color" content="#ffffff">
+  <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">CodeRef<b>Docs</b></a>
+    <button class="topbar__menu" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="topbar__search">
+      <input type="search" id="docs-search" class="topbar__search-input" placeholder="Search the docs..." autocomplete="off" aria-label="Search">
+      <kbd class="topbar__search-kbd">Ctrl K</kbd>
+      <div id="docs-search-results" class="search-results" hidden></div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__moon">&#9789;</span><span class="theme-toggle__sun">&#9728;</span>
+    </button>
+  </header>
+  <div class="layout">
+    <div class="layout__sidebar" id="sidebar">
+<nav class="nav-tree" aria-label="Documentation">
+    <ul class="nav-tree__root">
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>ASSISTANT (Entry)
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="index.html">What is CodeRef</a></li><li><a class="nav-tree__link" href="orchestrator.html">The orchestrator</a></li><li><a class="nav-tree__link" href="org-chart.html">The org chart</a></li><li><a class="nav-tree__link" href="how-to-navigate.html">How to navigate</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>CODEREF-CORE
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="coderef-core.html">What is CODEREF-CORE</a></li><li><a class="nav-tree__link" href="coderef-core-scanning.html">Scanning and artifacts</a></li><li><a class="nav-tree__link" href="coderef-core-rag.html">Semantic search (rag)</a></li><li><a class="nav-tree__link" href="coderef-core-analysis.html">Contract checks and docs</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SESSIONS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="sessions.html">The daily session</a></li><li><a class="nav-tree__link" href="sessions-lifecycle.html">The session lifecycle</a></li><li><a class="nav-tree__link" href="sessions-dispatch-flow.html">The dispatch flow</a></li><li><a class="nav-tree__link" href="sessions-wake-poll.html">The wake-poll loop</a></li><li><a class="nav-tree__link is-active" href="sessions-coordination.html">How the day is coordinated</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-soon">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>WORKFLOW
+        </button>
+        <ul class="nav-tree__pages"><li class="nav-tree__soon">Coming soon</li></ul>
+      </li>
+    </ul>
+  </nav>
+    </div>
+    <main class="layout__main">
+      <article class="prose">
+        <p class="prose__eyebrow">The coordination side</p>
+        <h1 class="prose__title">How the day is coordinated</h1>
+        <p class="prose__lede">ASSISTANT opens the session, every agent checks in and arms a wake-poll loop, work flows as dispatches (files in inboxes, polled &mdash; no server), blockers route back as andon pulls, and the day ends with a liveness-aware close. Coordination is a protocol made of files and a rhythm, not a runtime.</p>
+<h2 id="the-heartbeat">The session is the heartbeat</h2>
+<p>A <strong>daily session</strong> is how the fleet works as one thing for a day. It is not a meeting and not a server &mdash; it's a directory on disk (<code>LOGS/SESSIONS/daily-agent-session-{date}/</code>) that every active agent checks into, plus the coordination ASSISTANT runs on top of it. When you hear &quot;the loop,&quot; this is it: session-open, agents check in, work routes, agents stay responsive, session-close. The session is what turns a pile of independent agents into a coordinated fleet for the span of a day.</p>
+<p>This page is the <em>coordination</em> half of the section &mdash; how the day is driven. The <a href="sessions-lifecycle.html">lifecycle</a>, <a href="sessions-dispatch-flow.html">dispatch flow</a>, and <a href="sessions-wake-poll.html">wake-poll</a> pages cover the skill-side mechanics.</p>
+<h2 id="how-assistant-runs-the-day">How ASSISTANT runs the day</h2>
+<p><strong>ASSISTANT opens the session</strong> (<code>/create-daily-session</code>) &mdash; it seeds a directory for each domain that worked the prior day, writes the session record, and registers it in the active-sessions manifest so the resolver can find it. From that moment the day is &quot;live.&quot;</p>
+<p><strong>Agents check in</strong> (<code>/join-daily-session</code>) &mdash; each agent registers its presence and arms its wake-poll loop. After this, an agent is <em>in the session</em>: visible, reachable by dispatch, and on the heartbeat.</p>
+<p><strong>ASSISTANT coordinates, it does not micromanage.</strong> Its job for the day is to route work to the right domain, absorb blockers so no one is stuck, integrate finished work back to the trunk, and keep the standards. It does not do the domains' work &mdash; each domain is sovereign over its own area; ASSISTANT moves work <em>between</em> them.</p>
+<h2 id="how-work-routes">How work routes</h2>
+<p>Work moves through the fleet as <strong>dispatches</strong> &mdash; small JSON files dropped into a domain's inbox: from-domain, to-domain, a task, an objective, and &mdash; when it's real build work &mdash; the skills the receiver must log to complete it. The receiver picks it up on its next poll, accepts it, does the work, and marks it complete.</p>
+<p>This is the whole routing model: <strong>no central scheduler, no queue server &mdash; just files in inboxes that agents poll.</strong> ASSISTANT routes a dispatch to the domain that owns the work; when a domain finishes something that needs landing, it dispatches a ready-to-integrate notice back to ASSISTANT (the integrator). The fleet coordinates by passing files, not by a runtime.</p>
+<p>Two dispatch shapes are worth knowing:</p>
+<ul><li><strong>Work-delegation</strong> &mdash; carries required skills and is strict-enforced: the receiver must run the full lifecycle.</li><li><strong>Instruction-pass / recommendation</strong> &mdash; no strict lifecycle: a &quot;do this&quot; or a &quot;flagging for your call.&quot; Tagging a recommendation as strict is a known foot-gun the system has since fixed.</li></ul>
+<h2 id="the-andon-model">How blockers route back</h2>
+<p>A core rule: <strong>agent terminals are execution surfaces, not decision surfaces.</strong> When an agent hits something it can't decide &mdash; a blocker, an ambiguous scope, a cross-domain call &mdash; it does NOT ask the operator directly and does NOT guess. It <strong>routes the decision back to ASSISTANT</strong> as a blocked dispatch: the andon pull, like an assembly-line worker pulling the cord.</p>
+<p>ASSISTANT then either decides autonomously (most things are standards calls it can make) or, for the small operator-reserved set &mdash; schema-breaking changes, irreversible actions, explicit asks &mdash; surfaces it to the operator. The operator decides; ASSISTANT routes the resolution back down. Decisions flow to the one place equipped to make them, and agents keep executing instead of stalling on questions that aren't theirs to answer.</p>
+<h2 id="how-the-loop-ends">How the loop ends</h2>
+<p>At day's end ASSISTANT closes the session (<code>/close-daily-session</code>). The close is <strong>liveness-aware</strong> &mdash; it refuses to close a session that's still genuinely active (recent agent activity within the window), so the day doesn't get pulled out from under working agents. A truly stale session closes cleanly; a live one is protected. When it closes, the session record is timestamped done and the day's heartbeat stops.</p>
+<h2 id="canonical-sources">Canonical sources</h2>
+<ul><li><code>SKILLS/SESSION/create-daily-session/SKILL.md</code> and <code>SKILLS/SESSION/close-daily-session/SKILL.md</code> &mdash; the open and close contracts.</li><li><code>SKILLS/SESSION/_shared/DECISION-ROUTING.md</code> &mdash; the andon / decision-routing rule in full.</li></ul>
+      </article>
+    </main>
+    <div class="layout__toc">
+<aside class="toc" aria-label="On this page">
+    <p class="toc__title">On this page</p>
+    <ul class="toc__list"><li><a href="#the-heartbeat">The session is the heartbeat</a></li><li><a href="#how-assistant-runs-the-day">How ASSISTANT runs the day</a></li><li><a href="#how-work-routes">How work routes</a></li><li><a href="#the-andon-model">How blockers route back</a></li><li><a href="#how-the-loop-ends">How the loop ends</a></li><li><a href="#canonical-sources">Canonical sources</a></li></ul>
+  </aside>
+    </div>
+  </div>
+  <script src="assets/theme.js"></script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/search.js"></script>
+</body>
+</html>

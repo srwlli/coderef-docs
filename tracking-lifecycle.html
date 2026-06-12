@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The lifecycle of tracked entities &middot; CodeRef Ecosystem Docs</title>
+  <meta name="description" content="CodeRef tracks four entity kinds &mdash; stubs, workorders, dispatches, and tickets. They form a pipeline from &quot;an idea worth remembering&quot; to &quot;work that shipped,&quot; plus a parallel lane for bugs.">
+  <meta name="theme-color" content="#ffffff">
+  <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
+  <link rel="stylesheet" href="assets/docs.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="topbar__brand" href="index.html">CodeRef<b>Docs</b></a>
+    <button class="topbar__menu" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <div class="topbar__search">
+      <input type="search" id="docs-search" class="topbar__search-input" placeholder="Search the docs..." autocomplete="off" aria-label="Search">
+      <kbd class="topbar__search-kbd">Ctrl K</kbd>
+      <div id="docs-search-results" class="search-results" hidden></div>
+    </div>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__moon">&#9789;</span><span class="theme-toggle__sun">&#9728;</span>
+    </button>
+  </header>
+  <div class="layout">
+    <div class="layout__sidebar" id="sidebar">
+<nav class="nav-tree" aria-label="Documentation">
+    <ul class="nav-tree__root">
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>ASSISTANT (Entry)
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="index.html">What is CodeRef</a></li><li><a class="nav-tree__link" href="orchestrator.html">The orchestrator</a></li><li><a class="nav-tree__link" href="org-chart.html">The org chart</a></li><li><a class="nav-tree__link" href="how-to-navigate.html">How to navigate</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>CODEREF-CORE
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="coderef-core.html">What is CODEREF-CORE</a></li><li><a class="nav-tree__link" href="coderef-core-scanning.html">Scanning and artifacts</a></li><li><a class="nav-tree__link" href="coderef-core-rag.html">Semantic search (rag)</a></li><li><a class="nav-tree__link" href="coderef-core-analysis.html">Contract checks and docs</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SESSIONS
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="sessions.html">The daily session</a></li><li><a class="nav-tree__link" href="sessions-lifecycle.html">The session lifecycle</a></li><li><a class="nav-tree__link" href="sessions-dispatch-flow.html">The dispatch flow</a></li><li><a class="nav-tree__link" href="sessions-wake-poll.html">The wake-poll loop</a></li><li><a class="nav-tree__link" href="sessions-coordination.html">How the day is coordinated</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-open">
+        <button class="nav-tree__toggle" type="button" aria-expanded="true">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link is-active" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section is-soon">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>WORKFLOW
+        </button>
+        <ul class="nav-tree__pages"><li class="nav-tree__soon">Coming soon</li></ul>
+      </li>
+    </ul>
+  </nav>
+    </div>
+    <main class="layout__main">
+      <article class="prose">
+        <p class="prose__eyebrow">From idea to shipped</p>
+        <h1 class="prose__title">The lifecycle of tracked entities</h1>
+        <p class="prose__lede">CodeRef tracks four entity kinds &mdash; stubs, workorders, dispatches, and tickets. They form a pipeline from &quot;an idea worth remembering&quot; to &quot;work that shipped,&quot; plus a parallel lane for bugs.</p>
+<h2 id="stub">Stub &mdash; the lightweight idea</h2>
+<p>A <strong>stub</strong> (<code>STUB-XXXXXX</code>) is the smallest unit: a captured idea, improvement, or fix target that isn't ready to be full work yet. It has a <code>category</code> (<code>feature</code>, <code>improvement</code>, <code>fix</code>, and friends), a <code>priority</code>, an <code>owner_domain</code>, and a <code>status</code> that starts at <code>stub</code>. Stubs are the backlog &mdash; cheap to mint, easy to dedup, and the entry point to the workorder pipeline.</p>
+<h2 id="workorder">Workorder &mdash; the unit of execution</h2>
+<p>A <strong>workorder</strong> (<code>WO-...</code>) is a stub promoted into real, plannable work: it has phases, a plan, a communication record, and a close-out. Stubs feed workorders via <code>/create-workorder --from-stub=&lt;STUB-ID&gt;</code>. A workorder moves through plan, execute, review, close &mdash; and a workorder isn't <em>done</em> until its branch is merged to <code>main</code> <strong>and</strong> deleted.</p>
+<h2 id="dispatch">Dispatch &mdash; the unit of coordination</h2>
+<p>A <strong>dispatch</strong> (<code>DISPATCH-&lt;date&gt;-&lt;DOMAIN&gt;-NNN</code>) is a message of work or information routed from one agent domain to another through the daily session. It is a small state machine:</p>
+<ul><li><code>pending</code> &mdash; filed in the receiver's inbox, not yet seen.</li><li><code>accepted</code> &mdash; the receiver picked it up and is working it.</li><li><code>completed</code> &mdash; done, with a result summary written back onto the dispatch.</li><li><code>blocked</code> &mdash; the side-exit: it needs a decision or unblock before it can finish.</li></ul>
+<p>Agents poll their inbox, <strong>accept</strong> a dispatch, do the work, and <strong>complete</strong> it. A dispatch marked <code>blocked</code> is the &quot;andon cord&quot; &mdash; it surfaces a decision back to the coordinator rather than guessing. Every transition is written by the canonical runner, never by hand (see <a href="tracking-views-vs-db.html">Views-vs-DB discipline</a>).</p>
+<h2 id="ticket">Ticket &mdash; the bug lane</h2>
+<p>A <strong>ticket</strong> (<code>TKT-XXXXXX</code>) is the structured record for a <em>bug</em>: severity (impact), priority (scheduling), an <code>error_kind</code>, and a repro. Filing a ticket auto-mints a linked <code>category=fix</code> stub, so a bug flows straight into the same workorder pipeline.</p>
+<p>Tickets have their own guarded state machine &mdash; <code>new</code>, <code>triaged</code>, <code>in_progress</code>, <code>resolved</code>, <code>verified</code>, <code>closed</code>, with side-exits <code>duplicate</code>, <code>wontfix</code>, and <code>cannot_reproduce</code>. The guard that matters most: <code>resolved</code> and <code>verified</code> <strong>require evidence</strong> &mdash; a real artifact (commit hash, file path, pasted output), never a fabricated claim.</p>
+<h2 id="the-whole-flow">The shape of the whole flow</h2>
+<ul><li>An <strong>idea</strong> becomes a <strong>stub</strong>; a stub is promoted to a <strong>workorder</strong>; the workorder produces commits; the work ships when the branch is merged and the workorder closes.</li><li>A <strong>bug</strong> becomes a <strong>ticket</strong>, which auto-mints a fix stub &mdash; feeding the same pipeline.</li><li>At every stage, coordination between domains travels as a <strong>dispatch</strong> (pending to accepted to completed, with blocked as the escalation lane).</li></ul>
+<h2 id="canonical-sources">Canonical sources</h2>
+<ul><li><code>/stub</code>, <code>/create-workorder</code>, <code>/ticket</code> &mdash; the minting skills (each uses the canonical DB-insert path).</li><li><code>TRACKING/workorders.json</code>, <code>TRACKING/stubs.json</code>, <code>TRACKING/tickets.json</code> &mdash; the generated views of each lane.</li></ul>
+      </article>
+    </main>
+    <div class="layout__toc">
+<aside class="toc" aria-label="On this page">
+    <p class="toc__title">On this page</p>
+    <ul class="toc__list"><li><a href="#stub">Stub &mdash; the lightweight idea</a></li><li><a href="#workorder">Workorder &mdash; the unit of execution</a></li><li><a href="#dispatch">Dispatch &mdash; the unit of coordination</a></li><li><a href="#ticket">Ticket &mdash; the bug lane</a></li><li><a href="#the-whole-flow">The shape of the whole flow</a></li><li><a href="#canonical-sources">Canonical sources</a></li></ul>
+  </aside>
+    </div>
+  </div>
+  <script src="assets/theme.js"></script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/search.js"></script>
+</body>
+</html>
