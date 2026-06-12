@@ -414,3 +414,37 @@ table.data tbody tr:hover { background: var(--bg-soft); }
   .layout__main { padding: 28px 22px 70px; }
   .prose__title { font-size: 28px; }
 }
+
+/* ----------------------------------------------------------------------------
+   Skills catalog (Phase 7 -- generated reference tier)
+   ---------------------------------------------------------------------------- */
+.muted { color: var(--text-faint); }
+.catalog-controls { margin: 22px 0 8px; }
+.catalog-filter {
+  width: 100%; padding: 10px 14px; font-size: 15px; font-family: var(--font-sans);
+  color: var(--text); background: var(--bg-soft);
+  border: 1px solid var(--border); border-radius: 8px; outline: none;
+}
+.catalog-filter:focus { border-color: var(--accent); background: var(--surface); }
+.catalog-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip {
+  padding: 4px 10px; font-size: 12px; font-family: var(--font-sans);
+  color: var(--text-soft); background: var(--bg-soft);
+  border: 1px solid var(--border); border-radius: 999px; cursor: pointer;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent-text); }
+.chip.is-on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-text); }
+.catalog-empty { margin-top: 16px; }
+.catalog-group { margin-top: 8px; }
+.catalog-count { font-size: 14px; font-weight: 400; color: var(--text-faint); }
+.skill-list { list-style: none; padding: 0; margin: 12px 0 0; }
+.skill-list .skill-card {
+  margin: 0 0 10px; padding: 12px 14px;
+  background: var(--surface); border: 1px solid var(--border-soft);
+  border-radius: 8px; box-shadow: var(--shadow);
+}
+.skill-card__head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.skill-card__head a { text-decoration: none; }
+.skill-card__head code { font-size: 14px; }
+.skill-card__meta { font-size: 12px; color: var(--text-faint); }
+.skill-card__summary { margin: 6px 0 0; font-size: 13.5px; color: var(--text-soft); }
