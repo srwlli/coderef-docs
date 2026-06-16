@@ -76,14 +76,14 @@
         <p class="prose__eyebrow">SESSION skill</p>
         <h1 class="prose__title">/join-daily-session</h1>
         <p class="prose__lede">Agent domains check in to a daily session and write checkin.json/status.json (concurrent, lockless), then run /check-dispatch-inbox inline and arm the wake-poll loop. History in references/CHANGELOG.md.</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/join-daily-session</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-session">SESSION</a></td></tr><tr><th>Version</th><td>1.17.2</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/join-daily-session</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-session">SESSION</a></td></tr><tr><th>Version</th><td>1.18.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
 <h2 id="when-to-use">When to use</h2>
 <p>An agent domain needs to check in to a daily orchestration session</p>
 <h2 id="contract">Contract surface</h2>
 <p>What the skill touches, from its manifest:</p>
 <div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>LOGS/SESSIONS/daily-agent-session-{date}/{domain}/mapping-table.json</code></td></tr><tr><th>Writes</th><td><code>LOGS/SESSIONS/daily-agent-session-{date}/{domain}/checkin.json</code>, <code>LOGS/SESSIONS/daily-agent-session-{date}/{domain}/status.json</code></td></tr><tr><th>Depends on</th><td><a href="skill-create-daily-session.html"><code>/create-daily-session</code></a>, <a href="skill-align-coderef-culture.html"><code>/align-coderef-culture</code></a></td></tr></tbody></table></div>
 <h2 id="related">Related skills</h2>
-<ul><li><strong>Used by:</strong> <a href="skill-dispatch-session-request.html"><code>/dispatch-session-request</code></a>, <a href="skill-generate-session-report.html"><code>/generate-session-report</code></a>, <a href="skill-update-session-status.html"><code>/update-session-status</code></a></li><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-session">SESSION</a> (25 skills)</li></ul>
+<ul><li><strong>Used by:</strong> <a href="skill-dispatch-session-request.html"><code>/dispatch-session-request</code></a>, <a href="skill-generate-session-report.html"><code>/generate-session-report</code></a>, <a href="skill-update-session-status.html"><code>/update-session-status</code></a></li><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-session">SESSION</a> (26 skills)</li></ul>
 <h2 id="canonical-source">Canonical source</h2>
 <p>The authoritative contract is <code>SKILLS/SESSION/join-daily-session/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
 <p class="muted">Generated from <code>TRACKING/skills.json</code> at build time. Regenerated on every publish &mdash; do not hand-edit.</p>

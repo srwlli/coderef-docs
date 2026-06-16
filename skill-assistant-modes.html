@@ -73,19 +73,19 @@
     </div>
     <main class="layout__main">
       <article class="prose">
-        <p class="prose__eyebrow">STANDARDS skill</p>
+        <p class="prose__eyebrow">BE skill</p>
         <h1 class="prose__title">/assistant-modes</h1>
         <p class="prose__lede">ASSISTANT-specific output-mode discipline. 4 modes (operator-direct, audit-report, status-broadcast, triage) each with a fixed shape contract. Catches output-too-dense + multi-thread + missing-next-action drift. Phase 1 declarative; Phase 2 runtime gate deferred.</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/assistant-modes</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-standards">STANDARDS</a></td></tr><tr><th>Version</th><td>1.0.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td>prose-only (no runner)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/assistant-modes</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-be">BE</a></td></tr><tr><th>Version</th><td>1.0.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td>prose-only (no runner)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
 <h2 id="when-to-use">When to use</h2>
 <p>ASSISTANT consults at start of every operator-facing response. Pick mode based on request shape; enforce mode-specific shape contract. Default mode operator-direct on ambiguity.</p>
 <h2 id="contract">Contract surface</h2>
 <p>What the skill touches, from its manifest:</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>SKILLS/SESSION/_shared/ORGANIZATION-STRUCTURE.md</code>, <code>SKILLS/STANDARDS/be-brief/SKILL.md</code>, <code>SKILLS/STANDARDS/be-explicit/SKILL.md</code></td></tr><tr><th>Writes</th><td><span class="muted">none declared</span></td></tr><tr><th>Depends on</th><td><a href="skill-be-brief.html"><code>/be-brief</code></a>, <a href="skill-be-explicit.html"><code>/be-explicit</code></a></td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>SKILLS/SESSION/_shared/ORGANIZATION-STRUCTURE.md</code>, <code>SKILLS/BE/be-brief/SKILL.md</code>, <code>SKILLS/BE/be-explicit/SKILL.md</code></td></tr><tr><th>Writes</th><td><span class="muted">none declared</span></td></tr><tr><th>Depends on</th><td><a href="skill-be-brief.html"><code>/be-brief</code></a>, <a href="skill-be-explicit.html"><code>/be-explicit</code></a></td></tr></tbody></table></div>
 <h2 id="related">Related skills</h2>
-<ul><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-standards">STANDARDS</a> (15 skills)</li></ul>
+<ul><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-be">BE</a> (4 skills)</li></ul>
 <h2 id="canonical-source">Canonical source</h2>
-<p>The authoritative contract is <code>SKILLS/STANDARDS/assistant-modes/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
+<p>The authoritative contract is <code>SKILLS/BE/assistant-modes/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
 <p class="muted">Generated from <code>TRACKING/skills.json</code> at build time. Regenerated on every publish &mdash; do not hand-edit.</p>
       </article>
     </main>

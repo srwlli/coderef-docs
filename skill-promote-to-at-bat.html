@@ -73,19 +73,19 @@
     </div>
     <main class="layout__main">
       <article class="prose">
-        <p class="prose__eyebrow">STANDARDS skill</p>
+        <p class="prose__eyebrow">ON-TASK skill</p>
         <h1 class="prose__title">/promote-to-at-bat</h1>
         <p class="prose__lede">Promote an artifact into the operator's AT-BAT slot on the daily-session task board. Same artifact-shape regex as /lock-in; refuses freeform. Writes task-board-promotions.json AND calls /lock-in (at-bat IS the operator's lock-in).</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/promote-to-at-bat</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-standards">STANDARDS</a></td></tr><tr><th>Version</th><td>1.1.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/promote-to-at-bat</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-on-task">ON-TASK</a></td></tr><tr><th>Version</th><td>1.1.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
 <h2 id="when-to-use">When to use</h2>
 <p>Operator wants to set the active work for the day. Combines task-board ordering with the canonical /lock-in primitive so a single command both surfaces the work in the AT-BAT slot AND engages refuse-other-work discipline.</p>
 <h2 id="contract">Contract surface</h2>
 <p>What the skill touches, from its manifest:</p>
 <div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>LOGS/SESSIONS/daily-agent-session-{today}/task-board-promotions.json</code></td></tr><tr><th>Writes</th><td><code>LOGS/SESSIONS/daily-agent-session-{today}/task-board-promotions.json</code>, <code>LOGS/SESSIONS/daily-agent-session-{today}/{DOMAIN}/lock-in.json</code></td></tr><tr><th>Depends on</th><td><a href="skill-lock-in.html"><code>/lock-in</code></a></td></tr></tbody></table></div>
 <h2 id="related">Related skills</h2>
-<ul><li><strong>Used by:</strong> <a href="skill-coordinate-backlog.html"><code>/coordinate-backlog</code></a>, <a href="skill-fill-ladder.html"><code>/fill-ladder</code></a></li><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-standards">STANDARDS</a> (15 skills)</li></ul>
+<ul><li><strong>Used by:</strong> <a href="skill-coordinate-backlog.html"><code>/coordinate-backlog</code></a>, <a href="skill-fill-ladder.html"><code>/fill-ladder</code></a></li><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-on-task">ON-TASK</a> (5 skills)</li></ul>
 <h2 id="canonical-source">Canonical source</h2>
-<p>The authoritative contract is <code>SKILLS/STANDARDS/promote-to-at-bat/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
+<p>The authoritative contract is <code>SKILLS/ON-TASK/promote-to-at-bat/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
 <p class="muted">Generated from <code>TRACKING/skills.json</code> at build time. Regenerated on every publish &mdash; do not hand-edit.</p>
       </article>
     </main>

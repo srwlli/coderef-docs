@@ -73,19 +73,19 @@
     </div>
     <main class="layout__main">
       <article class="prose">
-        <p class="prose__eyebrow">WORKFLOW skill</p>
+        <p class="prose__eyebrow">ARCHIVED skill</p>
         <h1 class="prose__title">/archive-status</h1>
         <p class="prose__lede">Canonical read-only reporter for ARCHIVED-domain health. Computes ground-truth counts, drift indicators (D1-D9), and handoff-honor-rate. Bucketizes green/yellow/red. Read-only.</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/archive-status</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-workflow">WORKFLOW</a></td></tr><tr><th>Version</th><td>1.2.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/archive-status</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-archived">ARCHIVED</a></td></tr><tr><th>Version</th><td>1.2.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
 <h2 id="when-to-use">When to use</h2>
 <p>Operator wants the health snapshot of the archive surface. Used by /close-daily-session as final gate and /session-status as the ARCHIVED-domain line. Run standalone for a quick audit. Never mutates &mdash; see /archive-reconcile for the self-heal companion.</p>
 <h2 id="contract">Contract surface</h2>
 <p>What the skill touches, from its manifest:</p>
 <div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>TRACKING/stubs.json</code>, <code>TRACKING/workorders.json</code>, <code>TRACKING/dispatches.json</code>, <code>TRACKING/projects.json</code>, <code>CODEREF/ARCHIVED/</code>, <code>LOGS/SESSIONS/</code>, <code>SKILLS/WORKFLOW/_shared/archive-contract.md</code></td></tr><tr><th>Writes</th><td><span class="muted">none declared</span></td></tr><tr><th>Depends on</th><td><span class="muted">none declared</span></td></tr></tbody></table></div>
 <h2 id="related">Related skills</h2>
-<ul><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-workflow">WORKFLOW</a> (38 skills)</li></ul>
+<ul><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-archived">ARCHIVED</a> (6 skills)</li></ul>
 <h2 id="canonical-source">Canonical source</h2>
-<p>The authoritative contract is <code>SKILLS/WORKFLOW/archive-status/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
+<p>The authoritative contract is <code>SKILLS/ARCHIVED/archive-status/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
 <p class="muted">Generated from <code>TRACKING/skills.json</code> at build time. Regenerated on every publish &mdash; do not hand-edit.</p>
       </article>
     </main>

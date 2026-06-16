@@ -73,19 +73,19 @@
     </div>
     <main class="layout__main">
       <article class="prose">
-        <p class="prose__eyebrow">WORKFLOW skill</p>
+        <p class="prose__eyebrow">SESSION skill</p>
         <h1 class="prose__title">/nudge</h1>
         <p class="prose__lede">Wake-poll nudge for a stalled agent &mdash; fires a minimal instruction-pass dispatch when an agent's wake-poll appears dead.</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/nudge</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-workflow">WORKFLOW</a></td></tr><tr><th>Version</th><td>1.0.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/nudge</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-session">SESSION</a></td></tr><tr><th>Version</th><td>1.0.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
 <h2 id="when-to-use">When to use</h2>
 <p>An agent has pending dispatches in their inbox AND their status.json hasn't updated in &gt;10 min. Refuses to fire if inbox is empty (no noise).</p>
 <h2 id="contract">Contract surface</h2>
 <p>What the skill touches, from its manifest:</p>
 <div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>TRACKING/agent-domains.json</code>, <code>LOGS/SESSIONS/daily-agent-session-{date}/{DOMAIN}/status.json</code>, <code>LOGS/SESSIONS/daily-agent-session-{date}/{DOMAIN}/dispatch-*.json</code></td></tr><tr><th>Writes</th><td><code>LOGS/SESSIONS/daily-agent-session-{date}/{DOMAIN}/dispatch-{NNN}.json</code></td></tr><tr><th>Depends on</th><td><a href="skill-dispatch-session-request.html"><code>/dispatch-session-request</code></a>, <a href="skill-check-dispatch-inbox.html"><code>/check-dispatch-inbox</code></a></td></tr></tbody></table></div>
 <h2 id="related">Related skills</h2>
-<ul><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-workflow">WORKFLOW</a> (38 skills)</li></ul>
+<ul><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-session">SESSION</a> (26 skills)</li></ul>
 <h2 id="canonical-source">Canonical source</h2>
-<p>The authoritative contract is <code>SKILLS/WORKFLOW/nudge/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
+<p>The authoritative contract is <code>SKILLS/SESSION/nudge/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
 <p class="muted">Generated from <code>TRACKING/skills.json</code> at build time. Regenerated on every publish &mdash; do not hand-edit.</p>
       </article>
     </main>

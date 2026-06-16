@@ -73,19 +73,19 @@
     </div>
     <main class="layout__main">
       <article class="prose">
-        <p class="prose__eyebrow">STANDARDS skill</p>
+        <p class="prose__eyebrow">TRACKING skill</p>
         <h1 class="prose__title">/registry-sweep</h1>
         <p class="prose__lede">Automated hygiene tool for the CodeRef tracking registries. Scans terminal-state items, proposes mutations for user approval, enforces schema compliance.</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/registry-sweep</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-standards">STANDARDS</a></td></tr><tr><th>Version</th><td>1.1.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td>prose-only (no runner)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/registry-sweep</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-tracking">TRACKING</a></td></tr><tr><th>Version</th><td>1.1.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td>prose-only (no runner)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
 <h2 id="when-to-use">When to use</h2>
 <p>User asks to clean up TRACKING/, sweep stale workorders, find registry orphans/ghosts, or runs periodic maintenance. Also invoked via OpenClaw coderef-dispatch 'tracking sweep' grammar.</p>
 <h2 id="contract">Contract surface</h2>
 <p>What the skill touches, from its manifest:</p>
 <div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>TRACKING/schemas/*.schema.json</code>, <code>TRACKING/*.json</code>, <code>STUBS/**</code>, <code>coderef/workorder/*</code>, <code>coderef/sessions/*</code></td></tr><tr><th>Writes</th><td><code>TRACKING/*.json</code></td></tr><tr><th>Depends on</th><td><a href="skill-tracking-validator.html"><code>/tracking-validator</code></a></td></tr></tbody></table></div>
 <h2 id="related">Related skills</h2>
-<ul><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-standards">STANDARDS</a> (15 skills)</li></ul>
+<ul><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-tracking">TRACKING</a> (6 skills)</li></ul>
 <h2 id="canonical-source">Canonical source</h2>
-<p>The authoritative contract is <code>SKILLS/STANDARDS/registry-sweep/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
+<p>The authoritative contract is <code>SKILLS/TRACKING/registry-sweep/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
 <p class="muted">Generated from <code>TRACKING/skills.json</code> at build time. Regenerated on every publish &mdash; do not hand-edit.</p>
       </article>
     </main>

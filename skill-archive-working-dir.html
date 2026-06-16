@@ -73,19 +73,19 @@
     </div>
     <main class="layout__main">
       <article class="prose">
-        <p class="prose__eyebrow">WORKFLOW skill</p>
+        <p class="prose__eyebrow">ARCHIVED skill</p>
         <h1 class="prose__title">/archive-working-dir</h1>
         <p class="prose__lede">Move a single stale coderef/working/&lt;...&gt; scratch dir into the canonical archive root with manifest. Stale = slug matches a terminal-status workorder/stub feature_name. No registry row to flip. Idempotent. Conforms to _shared/archive-contract.md.</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/archive-working-dir</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-workflow">WORKFLOW</a></td></tr><tr><th>Version</th><td>1.0.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/archive-working-dir</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-archived">ARCHIVED</a></td></tr><tr><th>Version</th><td>1.0.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
 <h2 id="when-to-use">When to use</h2>
 <p>A workorder has shipped and left a gitignored coderef/working/&lt;...&gt; scratch directory behind. Use to archive that dead scratch dir under CODEREF/ARCHIVED/{project_id}/working/{slug}/ with an archive-manifest.json. Fourth archive mover beside the registry-tracked trinity (/archive-workorder, /archive-stub, /archive-dispatch); the difference is there is no registry row to mutate. Idempotent on re-run.</p>
 <h2 id="contract">Contract surface</h2>
 <p>What the skill touches, from its manifest:</p>
 <div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>coderef/working/{path}</code>, <code>TRACKING/workorders.json</code>, <code>TRACKING/stubs.json</code>, <code>SKILLS/WORKFLOW/_shared/archive-contract.md</code></td></tr><tr><th>Writes</th><td><code>CODEREF/ARCHIVED/{project_id}/working/{slug}/</code>, <code>TRACKING/archive-log.jsonl</code></td></tr><tr><th>Depends on</th><td><span class="muted">none declared</span></td></tr></tbody></table></div>
 <h2 id="related">Related skills</h2>
-<ul><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-workflow">WORKFLOW</a> (38 skills)</li></ul>
+<ul><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-archived">ARCHIVED</a> (6 skills)</li></ul>
 <h2 id="canonical-source">Canonical source</h2>
-<p>The authoritative contract is <code>SKILLS/WORKFLOW/archive-working-dir/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
+<p>The authoritative contract is <code>SKILLS/ARCHIVED/archive-working-dir/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
 <p class="muted">Generated from <code>TRACKING/skills.json</code> at build time. Regenerated on every publish &mdash; do not hand-edit.</p>
       </article>
     </main>
