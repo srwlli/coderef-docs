@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>/join-daily-session &middot; CodeRef Ecosystem Docs</title>
-  <meta name="description" content="Agent domains check in to a daily session and write checkin.json/status.json (concurrent, lockless), with worktree-landing awareness for the enforced worktree model. History in references/CHANGELOG.md.">
+  <meta name="description" content="Agent domains check in to a daily session and write checkin.json/status.json (concurrent, lockless), then run /check-dispatch-inbox inline and arm the wake-poll loop. History in references/CHANGELOG.md.">
   <meta name="theme-color" content="#ffffff">
   <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
   <link rel="stylesheet" href="assets/docs.css">
@@ -42,7 +42,7 @@
         <button class="nav-tree__toggle" type="button" aria-expanded="true">
           <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
         </button>
-        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li><li><a class="nav-tree__link is-active" href="skills-catalog.html">Browse all skills</a></li></ul>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li><li><a class="nav-tree__link" href="skills-map.html">Skill map</a></li><li><a class="nav-tree__link is-active" href="skills-catalog.html">Browse all skills</a></li></ul>
       </li>
       <li class="nav-tree__section">
         <button class="nav-tree__toggle" type="button" aria-expanded="false">
@@ -55,6 +55,12 @@
           <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
         </button>
         <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>Visualizations
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="visualizations.html">Typed skill graph</a></li></ul>
       </li>
       <li class="nav-tree__section is-soon">
         <button class="nav-tree__toggle" type="button" aria-expanded="false">
@@ -69,8 +75,8 @@
       <article class="prose">
         <p class="prose__eyebrow">SESSION skill</p>
         <h1 class="prose__title">/join-daily-session</h1>
-        <p class="prose__lede">Agent domains check in to a daily session and write checkin.json/status.json (concurrent, lockless), with worktree-landing awareness for the enforced worktree model. History in references/CHANGELOG.md.</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/join-daily-session</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-session">SESSION</a></td></tr><tr><th>Version</th><td>1.16.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
+        <p class="prose__lede">Agent domains check in to a daily session and write checkin.json/status.json (concurrent, lockless), then run /check-dispatch-inbox inline and arm the wake-poll loop. History in references/CHANGELOG.md.</p>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/join-daily-session</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-session">SESSION</a></td></tr><tr><th>Version</th><td>1.17.2</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
 <h2 id="when-to-use">When to use</h2>
 <p>An agent domain needs to check in to a daily orchestration session</p>
 <h2 id="contract">Contract surface</h2>

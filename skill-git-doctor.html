@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>/git-doctor &middot; CodeRef Ecosystem Docs</title>
-  <meta name="description" content="Audit a repo for stranded branches, dirty/wrong-branch worktrees + registry-vs-physical worktree invariants; emit PASS/WARN. --fix prunes safe strays/locks only.">
+  <meta name="description" content="Audit a repo for stranded branches, merged-undeleted wo/* branches (work landed, delete dropped), dirty/wrong-branch worktrees, registry-vs-physical + graph-vs-tree invariants; emit PASS/WARN. --fix prunes safe strays/locks + git branch -d merged-undeleted branches.">
   <meta name="theme-color" content="#ffffff">
   <script>(function(){var c=localStorage.getItem('cr-theme');if(c==='dark'||c==='light')document.documentElement.classList.add(c);})();</script>
   <link rel="stylesheet" href="assets/docs.css">
@@ -42,7 +42,7 @@
         <button class="nav-tree__toggle" type="button" aria-expanded="true">
           <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
         </button>
-        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li><li><a class="nav-tree__link is-active" href="skills-catalog.html">Browse all skills</a></li></ul>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li><li><a class="nav-tree__link" href="skills-map.html">Skill map</a></li><li><a class="nav-tree__link is-active" href="skills-catalog.html">Browse all skills</a></li></ul>
       </li>
       <li class="nav-tree__section">
         <button class="nav-tree__toggle" type="button" aria-expanded="false">
@@ -56,6 +56,12 @@
         </button>
         <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
       </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>Visualizations
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="visualizations.html">Typed skill graph</a></li></ul>
+      </li>
       <li class="nav-tree__section is-soon">
         <button class="nav-tree__toggle" type="button" aria-expanded="false">
           <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>WORKFLOW
@@ -67,19 +73,19 @@
     </div>
     <main class="layout__main">
       <article class="prose">
-        <p class="prose__eyebrow">STANDARDS skill</p>
+        <p class="prose__eyebrow">GIT skill</p>
         <h1 class="prose__title">/git-doctor</h1>
-        <p class="prose__lede">Audit a repo for stranded branches, dirty/wrong-branch worktrees + registry-vs-physical worktree invariants; emit PASS/WARN. --fix prunes safe strays/locks only.</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/git-doctor</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-standards">STANDARDS</a></td></tr><tr><th>Version</th><td>1.1.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, gemini</td></tr></tbody></table></div>
+        <p class="prose__lede">Audit a repo for stranded branches, merged-undeleted wo/* branches (work landed, delete dropped), dirty/wrong-branch worktrees, registry-vs-physical + graph-vs-tree invariants; emit PASS/WARN. --fix prunes safe strays/locks + git branch -d merged-undeleted branches.</p>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/git-doctor</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-git">GIT</a></td></tr><tr><th>Version</th><td>1.4.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td><code>run.mjs</code> (deterministic mechanics ship with the skill)</td></tr><tr><th>Surfaces</th><td>claude, codex, gemini</td></tr></tbody></table></div>
 <h2 id="when-to-use">When to use</h2>
 <p>Run at session start, before close, or whenever you need to confirm no agent left committed work stranded on a branch instead of merging it back to main.</p>
 <h2 id="contract">Contract surface</h2>
 <p>What the skill touches, from its manifest:</p>
 <div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>**/.git/**</code>, <code>TRACKING/agent-domains.json</code></td></tr><tr><th>Writes</th><td><span class="muted">none declared</span></td></tr><tr><th>Depends on</th><td><span class="muted">none declared</span></td></tr></tbody></table></div>
 <h2 id="related">Related skills</h2>
-<ul><li><strong>Used by:</strong> <a href="skill-close-daily-session.html"><code>/close-daily-session</code></a>, <a href="skill-git-rules.html"><code>/git-rules</code></a>, <a href="skill-review-workorder.html"><code>/review-workorder</code></a></li><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-standards">STANDARDS</a> (19 skills)</li></ul>
+<ul><li><strong>Used by:</strong> <a href="skill-close-daily-session.html"><code>/close-daily-session</code></a>, <a href="skill-git-rules.html"><code>/git-rules</code></a>, <a href="skill-review-workorder.html"><code>/review-workorder</code></a></li><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-git">GIT</a> (5 skills)</li></ul>
 <h2 id="canonical-source">Canonical source</h2>
-<p>The authoritative contract is <code>SKILLS/STANDARDS/git-doctor/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
+<p>The authoritative contract is <code>SKILLS/GIT/git-doctor/SKILL.md</code> in the private repo. This page is the map; the contract is the territory &mdash; when you need exact behavior, read the SKILL.md.</p>
 <p class="muted">Generated from <code>TRACKING/skills.json</code> at build time. Regenerated on every publish &mdash; do not hand-edit.</p>
       </article>
     </main>

@@ -1,0 +1,41 @@
+/* typed-skill-graph-bridge.css -- consumer-side token bridge (CR-HTML).
+ *
+ * The typed-skill-graph component is owned by SURFACES-HTML and consumed AS-IS
+ * by this docs site (DISPATCH-2026-06-16-CR-HTML-003). Its CSS expects the
+ * SURFACES-HTML token names (--card, --foreground, --primary, ...). This docs
+ * site uses its OWN token names in docs.css (--surface, --text, --accent, ...).
+ *
+ * Rather than fork the component CSS (which would break the supplier/consumer
+ * boundary), this bridge maps the site's tokens onto the names the component
+ * expects, scoped to the component's own block so nothing leaks. Because it
+ * references the site's live vars (not literals), it stays theme-aware: the
+ * graph re-tints automatically when docs.css flips to .dark.
+ *
+ * If the component needs a real change, dispatch it back to SURFACES-HTML --
+ * do not edit the vendored typed-skill-graph.css/js here.
+ *
+ * This file is the single page_style entry for the visualizations page: it
+ * pulls the vendored component CSS via @import, then layers the token bridge on
+ * top. (@import must lead the file.)
+ */
+@import url("typed-skill-graph.css");
+
+.typed-skill-graph {
+  /* surfaces / text */
+  --card: var(--surface);
+  --cardForeground: var(--text);
+  --foreground: var(--text);
+  --mutedForeground: var(--text-soft);
+  /* the site already defines --border identically; keep it explicit anyway */
+  --border: var(--border);
+  /* accent -> primary (depends_on stays --foreground; supersedes uses --primary) */
+  --primary: var(--accent);
+  /* style tokens the component references */
+  --style-card-border: 1px;
+  --style-radius: 10px;
+  /* typography */
+  --typography-font-sans: var(--font-sans);
+  --typography-font-mono: var(--font-mono);
+  --typography-size-sm: 0.875rem;
+  --typography-size-xs: 0.75rem;
+}

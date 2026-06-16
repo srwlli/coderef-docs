@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "category": "git",
+    "node_count": 5,
+    "generated_from": [
+      "TRACKING/skills.json",
+      "SKILLS/GIT/*/skill.json"
+    ],
+    "alias_resolved": [
+      {
+        "raw": "commit",
+        "resolved": "git-commit",
+        "source": "git-rules.depends_on",
+        "note": "manifest uses bare commit; real skill id is git-commit"
+      }
+    ],
+    "supersedes_in_category": 0,
+    "note": "reads/writes edges omitted by design (point at file globs, not skills)"
+  },
+  "nodes": [
+    {
+      "id": "git-commit",
+      "label": "git-commit",
+      "category": "git",
+      "summary": "The one commit verb (any agent/domain/time): /git-commit \"msg\" commits per GIT-STANDARD, s"
+    },
+    {
+      "id": "git-doctor",
+      "label": "git-doctor",
+      "category": "git",
+      "summary": "Audit a repo for stranded branches, merged-undeleted wo/* branches (work landed, delete dr"
+    },
+    {
+      "id": "git-land",
+      "label": "git-land",
+      "category": "git",
+      "summary": "Land a wo/* branch to trunk, push trunk to origin + VERIFY it reached origin (STUB-MFAZC1 "
+    },
+    {
+      "id": "git-rules",
+      "label": "git-rules",
+      "category": "git",
+      "summary": "Drop-in git skill for any terminal in any CodeRef repo: run.mjs orients + evaluates the la"
+    },
+    {
+      "id": "git-stage",
+      "label": "git-stage",
+      "category": "git",
+      "summary": "Scoped git-add wrapper. Reads in-flight focus_paths[] and refuses bare 'git add .' / '-A' "
+    }
+  ],
+  "edges": [
+    {
+      "from": "git-rules",
+      "to": "git-commit",
+      "type": "depends_on"
+    },
+    {
+      "from": "git-rules",
+      "to": "git-land",
+      "type": "depends_on"
+    },
+    {
+      "from": "git-rules",
+      "to": "git-doctor",
+      "type": "depends_on"
+    }
+  ]
+}

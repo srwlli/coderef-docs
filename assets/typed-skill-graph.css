@@ -1,0 +1,137 @@
+/* typed-skill-graph: static SVG renderer for CodeRef's TYPED skill graph.
+
+   Nodes = skills (token-tinted circles); edges = TYPED dependency relations.
+   The whole point of this component is that depends_on and supersedes render
+   DISTINCTLY — solid vs dashed, each with its own arrowhead. If you ever make
+   the two edge modifiers look identical you have flattened the typed graph and
+   defeated the component. Keep them visually separable.
+
+   ONE-WAY DEPENDENCY: this file MUST NOT redefine any other component's
+   selectors. Every selector below starts with .typed-skill-graph. All colors
+   come from tokens (no inline color literals in the JS); arrowhead markers use
+   currentColor so they inherit each edge's token-bound stroke. */
+
+.typed-skill-graph {
+  background: var(--card);
+  color: var(--cardForeground);
+  border: var(--style-card-border) solid var(--border);
+  border-radius: var(--style-radius);
+  padding: 1rem;
+  overflow-x: auto;
+  font-family: var(--typography-font-sans);
+}
+
+.typed-skill-graph__title {
+  margin: 0 0 0.5rem;
+  font-size: var(--typography-size-sm, 0.875rem);
+  font-weight: 600;
+  color: var(--mutedForeground);
+}
+
+.typed-skill-graph__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* --- Edges: the typed distinction lives here. --- */
+
+/* Base edge stroke. color: var(--...) on the line drives BOTH the stroke
+   (via currentColor) AND the arrowhead marker fill (markers inherit
+   currentColor from the referencing element). */
+.typed-skill-graph__edge {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+/* depends_on -> SOLID, foreground/border tone, filled arrowhead. */
+.typed-skill-graph__edge--depends-on {
+  color: var(--foreground);
+  stroke-dasharray: none;
+}
+
+/* supersedes -> DASHED, distinct lifecycle tint (primary), so deprecation
+   chains read at a glance and never blur into depends_on. */
+.typed-skill-graph__edge--supersedes {
+  color: var(--primary);
+  stroke-dasharray: 6 4;
+}
+
+/* Arrowheads inherit currentColor from the edge that references them. */
+.typed-skill-graph__arrow path {
+  fill: currentColor;
+}
+.typed-skill-graph__arrow--depends-on {
+  color: var(--foreground);
+}
+.typed-skill-graph__arrow--supersedes {
+  color: var(--primary);
+}
+
+/* --- Nodes --- */
+
+.typed-skill-graph__node-dot {
+  fill: color-mix(in srgb, var(--primary) 12%, var(--card));
+  stroke: var(--border);
+  stroke-width: 1.5;
+}
+
+.typed-skill-graph__node:hover .typed-skill-graph__node-dot {
+  stroke: var(--primary);
+}
+
+.typed-skill-graph__node-label {
+  font-family: var(--typography-font-mono);
+  font-size: 13px;
+  fill: var(--cardForeground);
+}
+
+/* --- Legend: always renders both edge types so the typed distinction is
+   proven even when a subgraph contains only one type (e.g. the git category
+   is all depends_on). --- */
+
+.typed-skill-graph__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: var(--style-card-border) solid var(--border);
+  font-size: var(--typography-size-sm, 0.8125rem);
+}
+
+.typed-skill-graph__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.typed-skill-graph__legend-swatch {
+  width: 40px;
+  height: 12px;
+  flex: none;
+}
+
+.typed-skill-graph__legend-label {
+  color: var(--mutedForeground);
+  font-family: var(--typography-font-mono);
+}
+
+.typed-skill-graph__note {
+  flex-basis: 100%;
+  margin: 0.25rem 0 0;
+  font-size: var(--typography-size-xs, 0.75rem);
+  color: var(--mutedForeground);
+  font-style: italic;
+}
+
+.typed-skill-graph__empty {
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--mutedForeground);
+}

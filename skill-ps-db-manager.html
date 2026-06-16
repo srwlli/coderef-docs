@@ -42,7 +42,7 @@
         <button class="nav-tree__toggle" type="button" aria-expanded="true">
           <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>SKILLS
         </button>
-        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li><li><a class="nav-tree__link is-active" href="skills-catalog.html">Browse all skills</a></li></ul>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="skills.html">What a skill is</a></li><li><a class="nav-tree__link" href="skills-anatomy.html">Anatomy of a package</a></li><li><a class="nav-tree__link" href="skills-finding.html">Finding and creating</a></li><li><a class="nav-tree__link" href="skills-canonical-vs-wrapper.html">Canonical vs wrapper</a></li><li><a class="nav-tree__link" href="skills-map.html">Skill map</a></li><li><a class="nav-tree__link is-active" href="skills-catalog.html">Browse all skills</a></li></ul>
       </li>
       <li class="nav-tree__section">
         <button class="nav-tree__toggle" type="button" aria-expanded="false">
@@ -55,6 +55,12 @@
           <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>TRACKING
         </button>
         <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="tracking.html">The registry-db model</a></li><li><a class="nav-tree__link" href="tracking-lifecycle.html">Entity lifecycle</a></li><li><a class="nav-tree__link" href="tracking-views-vs-db.html">Views-vs-DB discipline</a></li><li><a class="nav-tree__link" href="tracking-registries.html">The canonical registries</a></li></ul>
+      </li>
+      <li class="nav-tree__section">
+        <button class="nav-tree__toggle" type="button" aria-expanded="false">
+          <span class="nav-tree__caret" aria-hidden="true">&#9656;</span>Visualizations
+        </button>
+        <ul class="nav-tree__pages"><li><a class="nav-tree__link" href="visualizations.html">Typed skill graph</a></li></ul>
       </li>
       <li class="nav-tree__section is-soon">
         <button class="nav-tree__toggle" type="button" aria-expanded="false">
@@ -70,12 +76,12 @@
         <p class="prose__eyebrow">PRIMARY-SOURCES skill</p>
         <h1 class="prose__title">/ps-db-manager</h1>
         <p class="prose__lede">Storage/schema authority for Primary Sources DB &mdash; migrations, catalog, generated types, live verification. Sibling to ps-scanner and ps-seeder.</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/ps-db-manager</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-primary-sources">PRIMARY-SOURCES</a></td></tr><tr><th>Version</th><td>2.6.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td>prose-only (no runner)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Slash command</th><td><code>/ps-db-manager</code></td></tr><tr><th>Category</th><td><a href="skills-catalog.html#cat-primary-sources">PRIMARY-SOURCES</a></td></tr><tr><th>Version</th><td>2.7.0</td></tr><tr><th>Status</th><td>active</td></tr><tr><th>Runner</th><td>prose-only (no runner)</td></tr><tr><th>Surfaces</th><td>claude, codex, agy</td></tr><tr><th>Live surface</th><td>supabase:primary-sources (external Postgres DB; project identified in C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\config.toml)</td></tr></tbody></table></div>
 <h2 id="when-to-use">When to use</h2>
 <p>Use when an agent needs to inspect, design, migrate, verify, document, or safely operate the Primary Sources Supabase database.</p>
 <h2 id="contract">Contract surface</h2>
 <p>What the skill touches, from its manifest:</p>
-<div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\config.toml</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\migrations\*.sql</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\backups\*.sql</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\lib\supabase\types.ts</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\services\primary-sources-api\docs\*.md</code>, <code>C:\Users\willh\Desktop\CODEREF\ASSISTANT\SKILLS\INTEGRATION\ps-db-manager\references\*.md</code></td></tr><tr><th>Writes</th><td><code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\migrations\*.sql</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\backups\*.sql</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\lib\supabase\types.ts</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\services\primary-sources-api\docs\*.md</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\services\primary-sources-api\tests\*schema*.py</code></td></tr><tr><th>Depends on</th><td><span class="muted">none declared</span></td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data"><tbody><tr><th>Reads</th><td><code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\config.toml</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\migrations\*.sql</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\backups\*.sql</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\lib\supabase\types.ts</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\services\primary-sources-api\docs\*.md</code>, <code>C:\Users\willh\Desktop\CODEREF\ASSISTANT\SKILLS\PRIMARY-SOURCES\ps-db-manager\references\*.md</code></td></tr><tr><th>Writes</th><td><code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\migrations\*.sql</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\supabase\backups\*.sql</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\lib\supabase\types.ts</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\services\primary-sources-api\docs\*.md</code>, <code>C:\Users\willh\Desktop\CODEREF\PROJECTS\primary-sources\services\primary-sources-api\tests\*schema*.py</code></td></tr><tr><th>Depends on</th><td><span class="muted">none declared</span></td></tr></tbody></table></div>
 <h2 id="related">Related skills</h2>
 <ul><li><strong>Used by:</strong> <a href="skill-ps-scanner.html"><code>/ps-scanner</code></a></li><li><strong>Same category:</strong> <a href="skills-catalog.html#cat-primary-sources">PRIMARY-SOURCES</a> (11 skills)</li></ul>
 <h2 id="canonical-source">Canonical source</h2>
